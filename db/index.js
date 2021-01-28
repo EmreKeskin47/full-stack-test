@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 require("./models/user");
 
+//Connect method from mongoDB atlas to establish connection to the DB
 exports.connect = () => {
     return mongoose.connect(
         process.env.DB_URI,
