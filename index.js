@@ -1,13 +1,23 @@
 require("dotenv").config();
+
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-const port = process.env.PORT_NUMBER;
 
-app.get("/", (req, res) => {
-    res.send("Wellcome to FullStackDeveloperTask");
-});
-
-app.listen(port, async () => {
-    console.log(`listening on port ${port}!`);
+async function runServer() {
+    app.use(bodyParser.json());
     await require("./db").connect();
-});
+
+    app.get("", (req, res) => {
+        res.send("Welcome to FullStackDeveloperTask");
+    });
+    app.use("/api/v1/user", require("./routes/user"));
+
+    const PORT = process.env.PORT_NUMBER;
+    app.listen(PORT, (err) => {
+        if (err) console.error(err);
+        console.log("Server ready on port:", PORT);
+    });
+}
+
+runServer();
