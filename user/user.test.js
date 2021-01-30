@@ -2,11 +2,11 @@
 const User = require("./user");
 
 describe("User", () => {
-    const kimlikNumarası = 100;
+    const kimlikNumarası = 123;
     const adSoyad = "test test";
-    const aylıkGelirDilimiÇarpanı = 3;
+    const aylıkGelirDilimiÇarpanı = 1000;
     const cepTelefonu = "123456";
-    const ilKodu = 34;
+    const ilKodu = 61;
 
     const testUser = new User({
         kimlikNumarası,

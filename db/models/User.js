@@ -6,8 +6,8 @@ const UserSchema = new mongoose.Schema({
     aylıkGelirDilimiÇarpanı: { type: Number, required: true },
     cepTelefonu: { type: String, required: true },
     ilKodu: { type: Number, required: true },
-    skorSegmenti: Number,
-    şehirSkoru: Number,
+    skorSegment: Number,
+    şehirSkor: Number,
     toplamSkor: Number,
 });
 
