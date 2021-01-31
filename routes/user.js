@@ -10,7 +10,7 @@ const {
 // api/v1/user is the homepage for this class
 
 //GET method for api/v1/user, all the user are listed as response
-router.get("", (req, res) => {
+router.get("/", (req, res) => {
     UserModel.find()
         .then((users) => {
             res.send(users);
@@ -18,10 +18,12 @@ router.get("", (req, res) => {
         .catch((err) => console.log(err));
 });
 
-//GET method for api/v1/user/id, user data is returned as response
-router.get("/:id", (req, res) => {
-    UserModel.findById(req.params.id)
-        .then((user) => res.send(user))
+//GET method for api/v1/user/id, user data with given kimlikNo is returned as response
+router.get("/:kimlik", (req, res) => {
+    UserModel.find({ kimlikNumarası: { $eq: req.params.kimlik } })
+        .then((users) => {
+            res.send(users);
+        })
         .catch((err) => console.log(err));
 });
 
@@ -82,6 +84,12 @@ router.put("/:id", (req, res) => {
         .then((result) => {
             res.send(result);
         })
+        .catch((err) => console.log(err));
+});
+
+router.delete("/", (req, res) => {
+    UserModel.deleteMany({})
+        .then(res.send("Deleted every user "))
         .catch((err) => console.log(err));
 });
 

@@ -1,8 +1,10 @@
 require("dotenv").config();
-
+const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
+
 const app = express();
+app.use(cors());
 
 async function runServer() {
     app.use(bodyParser.json());
@@ -11,7 +13,7 @@ async function runServer() {
     app.get("", (req, res) => {
         res.send("Welcome to FullStackDeveloperTask");
     });
-    app.use("/api/v1/user", require("./routes/user"));
+    app.use("/api/v1/user/", require("./routes/user"));
 
     const PORT = process.env.PORT_NUMBER;
     app.listen(PORT, (err) => {
