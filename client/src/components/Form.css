@@ -1,5 +1,30 @@
+.root {
+    padding-top: 5%;
+    display: flex;
+}
+
 .dropdown {
     padding-top: 20px;
     padding-bottom: 20px;
     display: grid;
+}
+
+.scoreboard {
+    padding: 5%;
+    width: 55%;
+}
+
+.formContainer {
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    width: 60%;
+}
+
+.title {
+    text-align: center;
+}
+
+.progress-bar {
+    padding-top: 30px;
 }
