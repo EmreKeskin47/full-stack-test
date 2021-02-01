@@ -1,13 +1,16 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import FormComponent from "../../components/Form";
+import FormComponent from "../../components/form/Form";
 import User from "../../models/User";
 import nav from "react-bootstrap/Nav";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import HomePage from "../../components/homepage/Homepage";
+import EditUser from "../../components/editUser/EdtUser";
 
 const NavBar = () => {
     const user = new User("", "", 0, "", 0, 0, 0, 0);
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -44,8 +47,14 @@ const NavBar = () => {
             </nav>
             <BrowserRouter>
                 <Switch>
+                    <Route path="/edit">
+                        <EditUser />
+                    </Route>
                     <Route path="/create">
                         <FormComponent user={user} />
+                    </Route>
+                    <Route path="/">
+                        <HomePage />
                     </Route>
                 </Switch>
             </BrowserRouter>
