@@ -1,5 +1,4 @@
 .root {
-    padding-top: 5%;
     display: flex;
 }
 
@@ -17,7 +16,6 @@
 .formContainer {
     justify-content: center;
     align-items: center;
-    padding: 5%;
     width: 60%;
 }
 

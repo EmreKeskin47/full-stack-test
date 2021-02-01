@@ -8,6 +8,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { createUser, getUserByKimlikNo } from "../../api/UserAPI";
 import "./Form.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import CustomAlert from "../customAlert/CustomAlert";
 
 //Form component can be used as a form, to create a new user and also to edit already existing user
 const FormComponent = (props) => {
@@ -51,130 +52,142 @@ const FormComponent = (props) => {
     };
 
     return (
-        <div className="root">
-            <Form className="formContainer">
-                <Form.Group>
-                    <Form.Label>Kimlik Numarası</Form.Label>
-                    <Form.Control
-                        placeholder="Kimlik No"
-                        value={kimlikNo}
-                        onChange={(event) => {
-                            setKimlikNo(event.target.value);
-                        }}
-                    />
-                </Form.Group>
+        <div>
+            <h1 className="title">{props.actionTitle}</h1>
+            <div className="root">
+                <Form className="formContainer">
+                    <Form.Group>
+                        <Form.Label>Kimlik Numarası</Form.Label>
+                        <Form.Control
+                            placeholder="Kimlik No"
+                            value={kimlikNo}
+                            onChange={(event) => {
+                                setKimlikNo(event.target.value);
+                            }}
+                        />
+                    </Form.Group>
 
-                <Form.Group>
-                    <Form.Label>Ad Soyad</Form.Label>
-                    <Form.Control
-                        placeholder="İsim Soyisim"
-                        value={adSoyad}
-                        onChange={(event) => {
-                            setAdSoyad(event.target.value);
-                        }}
-                    />
-                </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Ad Soyad</Form.Label>
+                        <Form.Control
+                            placeholder="İsim Soyisim"
+                            value={adSoyad}
+                            onChange={(event) => {
+                                setAdSoyad(event.target.value);
+                            }}
+                        />
+                    </Form.Group>
 
-                <Form.Group>
-                    <Form.Label>Telefon Numaranız</Form.Label>
-                    <Form.Control
-                        placeholder="Telefon"
-                        value={telefonNo}
-                        onChange={(event) => {
-                            setTelefonNo(event.target.value);
-                        }}
-                    />
-                </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Telefon Numaranız</Form.Label>
+                        <Form.Control
+                            placeholder="Telefon"
+                            value={telefonNo}
+                            onChange={(event) => {
+                                setTelefonNo(event.target.value);
+                            }}
+                        />
+                    </Form.Group>
 
-                <div className="dropdown">
-                    <DropdownButton
-                        required
-                        alignRight
-                        title="Aylık Gelir Dilimi"
-                        id="dropdown-menu-align-right"
-                        onSelect={(event) => {
-                            setAylıkÇarpan(event);
-                        }}
-                    >
-                        <Dropdown.Item eventKey="800">0-2999TL</Dropdown.Item>
-                        <Dropdown.Item eventKey="1000">
-                            3000TL-4999TL
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="1200">
-                            5000TL-7999TL
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="1500">
-                            8000TL-11999TL
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="2000">
-                            12000TL ve üzeri
-                        </Dropdown.Item>
-                    </DropdownButton>
-                    <DropdownButton
-                        required
-                        alignRight
-                        title="Şehir Seçimi"
-                        id="dropdown-menu-align-right"
-                        onSelect={(event) => {
-                            setİlKodu(event);
-                        }}
-                    >
-                        <Dropdown.Item eventKey="6">Ankara</Dropdown.Item>
-                        <Dropdown.Item eventKey="34">İstanbul</Dropdown.Item>
-                        <Dropdown.Item eventKey="61">Trabzon</Dropdown.Item>
-                    </DropdownButton>
-                </div>
-                {
-                    //Conditional Rendering, user can only submit inputs if he/she has given all the required data
-                    (kimlikNo !== "") &
-                    (adSoyad !== "") &
-                    (aylıkÇarpan !== 0) &
-                    (telefonNo !== "") &
-                    (ilKodu !== 0) ? (
-                        <Button type="button" onClick={onFormSubmit}>
-                            {props.actionTitle}
-                        </Button>
-                    ) : (
-                        <Alert variant="info">
-                            Yukarıdaki her alan doldurulunca kaydetme tuşu
-                            otomatik olarak ortaya çıkıcaktır.
-                        </Alert>
-                    )
-                }
-            </Form>
-            {score === true ? (
-                <div className="scoreboard">
-                    <Alert variant="info">{`${props.actionTitle} Successful`}</Alert>
+                    <div className="dropdown">
+                        <DropdownButton
+                            required
+                            alignRight
+                            title="Aylık Gelir Dilimi"
+                            id="dropdown-menu-align-right"
+                            onSelect={(event) => {
+                                setAylıkÇarpan(event);
+                            }}
+                        >
+                            <Dropdown.Item eventKey="800">
+                                0-2999TL
+                            </Dropdown.Item>
+                            <Dropdown.Item eventKey="1000">
+                                3000TL-4999TL
+                            </Dropdown.Item>
+                            <Dropdown.Item eventKey="1200">
+                                5000TL-7999TL
+                            </Dropdown.Item>
+                            <Dropdown.Item eventKey="1500">
+                                8000TL-11999TL
+                            </Dropdown.Item>
+                            <Dropdown.Item eventKey="2000">
+                                12000TL ve üzeri
+                            </Dropdown.Item>
+                        </DropdownButton>
+                        <DropdownButton
+                            required
+                            alignRight
+                            title="Şehir Seçimi"
+                            id="dropdown-menu-align-right"
+                            onSelect={(event) => {
+                                setİlKodu(event);
+                            }}
+                        >
+                            <Dropdown.Item eventKey="6">Ankara</Dropdown.Item>
+                            <Dropdown.Item eventKey="34">
+                                İstanbul
+                            </Dropdown.Item>
+                            <Dropdown.Item eventKey="61">Trabzon</Dropdown.Item>
+                        </DropdownButton>
+                    </div>
+                    {
+                        //Conditional Rendering, user can only submit inputs if he/she has given all the required data
+                        (kimlikNo !== "") &
+                        (adSoyad !== "") &
+                        (aylıkÇarpan !== 0) &
+                        (telefonNo !== "") &
+                        (ilKodu !== 0) ? (
+                            <Button type="button" onClick={onFormSubmit}>
+                                {props.actionTitle}
+                            </Button>
+                        ) : (
+                            //Until all the required fields are filled this alert will be visible
+                            <Alert variant="info">
+                                Yukarıdaki her alan doldurulunca kaydetme tuşu
+                                otomatik olarak ortaya çıkıcaktır.
+                            </Alert>
+                        )
+                    }
+                </Form>
+                {score === true ? (
+                    <div className="scoreboard">
+                        <CustomAlert
+                            variant="info"
+                            title={`${props.actionTitle} Successful`}
+                        />
 
-                    <h2 className="title"> USER SCORES </h2>
-                    <h4> skorSegment: {skorSegment}/9</h4>
-                    <ProgressBar
-                        class="progress-bar"
-                        now={parseInt((skorSegment * 100) / 9)}
-                        label={`${parseInt((skorSegment * 100) / 9)}%`}
-                    />
+                        <h2 className="title"> USER SCORES </h2>
+                        <h4> skorSegment: {skorSegment}/9</h4>
+                        <ProgressBar
+                            class="progress-bar"
+                            now={parseInt((skorSegment * 100) / 9)}
+                            label={`${parseInt((skorSegment * 100) / 9)}%`}
+                        />
 
-                    <h4> şehirSkor: {şehirSkor}/2000</h4>
-                    <ProgressBar
-                        class="progress-bar"
-                        now={parseInt((şehirSkor * 100) / 2000)}
-                        label={`${parseInt((şehirSkor * 100) / 2000)}%`}
-                    />
+                        <h4> şehirSkor: {şehirSkor}/2000</h4>
+                        <ProgressBar
+                            class="progress-bar"
+                            now={parseInt((şehirSkor * 100) / 2000)}
+                            label={`${parseInt((şehirSkor * 100) / 2000)}%`}
+                        />
 
-                    <h4> toplamSkor: {toplamSkor}/20,000</h4>
-                    <ProgressBar
-                        class="progress-bar"
-                        now={parseInt((toplamSkor * 100) / 20000)}
-                        label={`${parseInt((toplamSkor * 100) / 20000)}%`}
+                        <h4> toplamSkor: {toplamSkor}/20,000</h4>
+                        <ProgressBar
+                            class="progress-bar"
+                            now={parseInt((toplamSkor * 100) / 20000)}
+                            label={`${parseInt((toplamSkor * 100) / 20000)}%`}
+                        />
+                    </div>
+                ) : success === false ? (
+                    <CustomAlert
+                        variant="danger"
+                        title={`${props.actionTitle} failed, same user already exists`}
                     />
-                </div>
-            ) : success === false ? (
-                <Alert variant="danger">
-                    {`${props.actionTitle} failed, same user already exists`}
-                </Alert>
-            ) : (
-                <div></div>
-            )}
+                ) : (
+                    <div></div>
+                )}
+            </div>
         </div>
     );
 };
