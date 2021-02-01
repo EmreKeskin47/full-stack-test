@@ -132,7 +132,7 @@ const FormComponent = (props) => {
                     (telefonNo !== "") &
                     (ilKodu !== 0) ? (
                         <Button type="button" onClick={onFormSubmit}>
-                            Kullanıcıyı Kaydet
+                            {props.actionTitle}
                         </Button>
                     ) : (
                         <Alert variant="info">
@@ -144,7 +144,7 @@ const FormComponent = (props) => {
             </Form>
             {score === true ? (
                 <div className="scoreboard">
-                    <Alert variant="info">User created successfully</Alert>
+                    <Alert variant="info">{`${props.actionTitle} Successful`}</Alert>
 
                     <h2 className="title"> USER SCORES </h2>
                     <h4> skorSegment: {skorSegment}/9</h4>
@@ -169,7 +169,9 @@ const FormComponent = (props) => {
                     />
                 </div>
             ) : success === false ? (
-                <Alert variant="danger">User already exists </Alert>
+                <Alert variant="danger">
+                    {`${props.actionTitle} failed, same user already exists`}
+                </Alert>
             ) : (
                 <div></div>
             )}

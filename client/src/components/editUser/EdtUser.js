@@ -53,7 +53,10 @@ const EditUser = () => {
                     </Alert>
                 ) : userExist ? (
                     <div>
-                        <FormComponent user={user} />
+                        <FormComponent
+                            user={user}
+                            actionTitle={"Update User"}
+                        />
                     </div>
                 ) : (
                     <div></div>

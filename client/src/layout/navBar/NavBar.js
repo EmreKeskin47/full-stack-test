@@ -51,7 +51,7 @@ const NavBar = () => {
                         <EditUser />
                     </Route>
                     <Route path="/create">
-                        <FormComponent user={user} />
+                        <FormComponent user={user} actionTitle={"Save User"} />
                     </Route>
                     <Route path="/">
                         <HomePage />
