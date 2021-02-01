@@ -5,7 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import { createUser, getUserByKimlikNo } from "../api/UserAPI";
+import { createUser, getUserByKimlikNo } from "../../api/UserAPI";
 import "./Form.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -169,7 +169,7 @@ const FormComponent = (props) => {
                     />
                 </div>
             ) : success === false ? (
-                <Alert variant="danger">AMK </Alert>
+                <Alert variant="danger">User already exists </Alert>
             ) : (
                 <div></div>
             )}
